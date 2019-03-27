@@ -1,0 +1,12 @@
+{% comment %}
+parameters:
+
+optional class: string - space separated list of css classes
+required target: string - the name of the data-target
+{% endcomment %}
+<a role="button" class="navbar-burger burger {{ include.class }}" aria-label="menu" aria-expanded="false" data-target="{{ include.target }}">
+  <span aria-hidden="true"></span>
+  <span aria-hidden="true"></span>
+  <span aria-hidden="true"></span>
+</a>
+

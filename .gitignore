@@ -1,2 +1,6 @@
 _site
 .sass-cache
+attic
+package-lock.json
+node_modules
+.*.swp

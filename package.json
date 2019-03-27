@@ -1,0 +1,8 @@
+{
+  "name": "testdeck-jekyll-theme",
+  "private": true,
+  "version": "0",
+  "devDependencies": {
+    "bulma": "0.7.4"
+  }
+}

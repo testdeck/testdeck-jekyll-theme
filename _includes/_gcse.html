@@ -1,0 +1,25 @@
+{% comment %}
+there is a brint/jekyll-google_cse plugin, but it does not support all configuration options
+{% endcomment %}
+<script>
+  $(document).ready(function() {
+    var cx = '{{ site.gcse.id }}';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  });
+  $(window).on('load', function () {
+    $('input.gsc-input')[0].placeholder = 'Search...';
+  });
+</script>
+<gcse:searchbox-only
+  newWindow="true"
+  enableHistory="false"
+  autoCompleteMaxCompletions="10"
+  autoCompleteMatchType='any'
+  autoCompleteMaxPromotions="0"
+  as_sitesearch="{{ site.gcse.host }}"></gcse:searchbox-only>
+

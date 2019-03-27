@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+{% assign indices = site.pages | where: "role", "index" | sort: "order" %}
+{% assign pages = site.pages | where: "section", layout.section | where: "role", "page" | sort: "order" %}
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css" type="text/css">
+
+    <link rel="stylesheet" href="{{ '/assets/css/screen.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
+    <link rel="stylesheet" href="{{ '/assets/css/print.css?v=' | append: site.github.build_revision | relative_url }}" media="print" type="text/css">
+
+    {% seo %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="/assets/js/anchorscroll.js"></script>
+    <script src="/assets/js/sticky-kit.min.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <script>
+      $(document).ready(function () {
+        $('.navbar-burger').click(function () {
+          $(this).toggleClass('is-active');
+          $('#' + this.getAttribute('data-target')).toggleClass('is-active');
+        });
+
+        // make sidebar and toc sticky
+        var toc = $('#toc');
+        if (toc.length) {
+          toc.stick_in_parent({ offset_top: toc.offset().top });
+        }
+        var sidebar = $('#sidebar');
+        if (sidebar.length) {
+          sidebar.stick_in_parent({ offset_top: sidebar.offset().top });
+        }
+      });
+    </script>
+
+    <style>
+    #logo {
+      height: 12rem;
+    }
+    </style>
+  </head>
+
+  <body class="has-navbar-fixed-top">
+
+    <nav id="topbar" class="navbar is-fixed-top">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img id="logo" src="/assets/img/logo.svg">
+          </a>
+
+          {% include _navbar-burger.html target="topbar-menu" %}
+        </div>
+
+        <div id="topbar-menu" class="navbar-menu">
+          <div class="navbar-end">
+            <div class="navbar-item">
+              {% include _gcse.html %}
+            </div>
+            <a class="navbar-item" href="https://github.com/testdeck/testdeck">
+              View on GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section id="banner" class="hero is-tdk-red has-text-white is-small">
+      <div class="hero-head">
+        <div class="container">
+          <div class="content">
+            <h2 class="has-text-white">testdeck</h2>
+            {% if layout.section == 'frontpage' %}
+            <p>{{ site.description }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      {% comment %}
+      required, otherwise is-medium modifier and others will not work
+      {% endcomment %}
+      {% if layout.section == 'frontpage' %}
+      <div class="hero-body"></div>
+      {% endif %}
+
+      <div id="navbar" class="hero-foot">
+        <div id="navbar2" class="tabs is-boxed is-fullwidth">
+          <div class="container">
+            <ul>
+              {% for item in indices %}
+                <li class="{% if layout.section == item.section %}is-active{% endif %}"><a href="{{ item.dir }}">{{ item.label }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% comment %}
+    give the user a chance to access additional content in guides/reference/support or whereever there is a sidebar
+    {% endcomment %}
+    {% if layout.sidebar %}
+    <nav class="is-hidden-desktop">
+      <div style="height: 48px;">
+        {% include _navbar-burger.html target="sidebar-menu" class="is-hidden-desktop is-pulled-left" %}
+      </div>
+      {% comment %}
+      basically a duplicate of the sidebar
+      {% endcomment %}
+      <div id="sidebar-menu" class="navbar-menu">
+        <ul>
+          {% for item in pages %}
+          <li class="navbar-item"><a href="{{ item.dir }}{{ item.name | replace: ".md", "" }}">{{ item.label }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </nav>
+    {% endif %}
+
+    <main>
+      <div class="container">
+        <div class="columns">
+          {% if layout.sidebar %}
+          <aside class="column is-2 section is-hidden-touch">
+            <div id="sidebar">
+              <h3 class="menu-label">{{ layout.sidebar_label }}</h3>
+              <ul class="menu-list">
+                {% for item in pages  %}
+                <li><a href="{{ item.dir }}{{ item.name | replace: ".md", "" }}">{{ item.label }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </aside>
+          {% endif %}
+          <div class="column {% if layout.sidebar and layout.toc %}is-7{% elsif layout.sidebar %}is-10{% elsif layout.toc %}is-9{% else %}is-12{% endif %}">
+            <section id="content" class="content">
+              {{ content }}
+            </section>
+          </div>
+          {% if layout.toc or page.toc %}
+          <aside class="column is-3 section is-hidden-mobile">
+            <div id="toc">
+              <h3 class="menu-label">Table of Contents</h3>
+              {% include toc.html html=content id="toc" sanitize=true %}
+            </div>
+          </aside>
+          {% endif %}
+        </div>
+      </div>
+    </main>
+
+    <footer class="hero is-tdk-red is-small">
+      <div class="hero-body">
+        <div class="container has-text-white">
+          (C) 2019 Testdeck Team, Licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a>.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
