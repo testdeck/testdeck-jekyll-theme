@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/fontawesome.min.css" type="text/css">
+
+    <link rel="stylesheet" href="{{ '/assets/css/screen.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
+    <link rel="stylesheet" href="{{ '/assets/css/print.css?v=' | append: site.github.build_revision | relative_url }}" media="print" type="text/css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body class="has-navbar-fixed-top">
+
+    <nav id="topbar" class="navbar is-fixed-top">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <img id="logo" src="/assets/img/logo.svg">
+          </a>
+        </div>
+    </nav>
+
+    <section id="banner" class="hero is-tdk-red has-text-white is-small">
+      <div class="hero-head">
+        <div class="container">
+          <div class="content">
+            <h2 class="has-text-white">testdeck</h2>
+            <p>testdeck catch phrase...</p>
+          </div>
+        </div>
+      </div>
+
+      {% comment %}
+      required, otherwise is-medium modifier will not work
+      {% endcomment %}
+      <div class="hero-body"></div>
+
+      <div class="hero-foot">
+      </div>
+    </section>
+
+    <main>
+      <div class="container content">
+        {{ content }}
+      </div>
+    </main>
+  </body>
+</html>

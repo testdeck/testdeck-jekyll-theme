@@ -1,0 +1,28 @@
+title: testdeck-jekyll-theme
+description: testdeck-jekyll-theme is a theme for the testdeck site
+show_downloads: true
+theme: testdeck-jekyll-theme
+
+google_analytics: false
+
+
+#
+# sass
+# 
+sass:
+  sass_dir: _sass
+  style: compressed
+
+
+#
+# gcse
+#
+gcse:
+  id: 010650276315653629951:v3s_qe8occu
+  host: www.testdeck.org
+
+
+#
+# build settings
+#
+exclude:
