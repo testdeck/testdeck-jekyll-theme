@@ -72,9 +72,12 @@
 
         <div id="topbar-menu" class="navbar-menu">
           <div class="navbar-end">
+          {% comment %}
+          we do not want to hassle around with cookie regulations right now, outcommenting the google custom search engine stuff for now
             <div class="navbar-item">
               {% include _gcse.html %}
             </div>
+          {% endcomment %}
             <a class="navbar-item" href="https://github.com/testdeck/testdeck">
               View on GitHub
             </a>
