@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 {% assign indices = site.pages | where: "role", "index" | sort: "order" %}
 {% assign pages = site.pages | where: "section", layout.section | where: "role", "page" | sort: "order" %}
+{% assign hasToc = false %}
+{% if layout.toc or page.toc %}
+{% assign hasToc = true %}
+{% endif %}
+{% assign hasSidebar = false %}
+{% if layout.sidebar or page.sidebar %}
+{% assign hasSidebar = true %}
+{% endif %}
 <html>
   <head>
     <meta charset='utf-8'>
@@ -109,7 +117,7 @@
     {% comment %}
     give the user a chance to access additional content in guides/reference/support or whereever there is a sidebar
     {% endcomment %}
-    {% if layout.sidebar %}
+    {% if hasSidebar %}
     <nav class="is-hidden-desktop">
       <div style="height: 48px;">
         {% include _navbar-burger.html target="sidebar-menu" class="is-hidden-desktop is-pulled-left" %}
@@ -130,7 +138,7 @@
     <main>
       <div class="container">
         <div class="columns">
-          {% if layout.sidebar %}
+          {% if hasSidebar %}
           <aside class="column is-2 section is-hidden-touch">
             <div id="sidebar">
               <h3 class="menu-label">{{ layout.sidebar_label }}</h3>
@@ -142,12 +150,12 @@
             </div>
           </aside>
           {% endif %}
-          <div class="column {% if layout.sidebar and layout.toc %}is-7{% elsif layout.sidebar %}is-10{% elsif layout.toc %}is-9{% else %}is-12{% endif %}">
+          <div class="column {% if hasToc and hasSidebar %}is-7{% elsif hasSidebar %}is-10{% elsif hasToc %}is-9{% else %}is-12{% endif %}">
             <section id="content" class="content">
               {{ content }}
             </section>
           </div>
-          {% if layout.toc or page.toc %}
+          {% if hasToc %}
           <aside class="column is-3 section is-hidden-mobile">
             <div id="toc">
               <h3 class="menu-label">Table of Contents</h3>
