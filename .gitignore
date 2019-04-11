@@ -4,3 +4,4 @@ attic
 package-lock.json
 node_modules
 .*.swp
+.idea
