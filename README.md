@@ -41,9 +41,47 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 
 Checkout it out.
 
-Run ./script/bootstrap to install the required dependencies.
+### Install Pre-Requisites (Linux/Debian)
 
-Run ./script/serve and open http://localhost:4000 to see it in action.
+#### Standards
+
+```
+sudo apt-get install build-essential ruby zlib1g-dev zlib1g
+gem install jekyll
+```
+
+#### Node/NVM
+
+```
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+```
+
+Activate NVM and install the latest version of node.
+
+```
+nvm install node
+```
+
+### Install Dependencies
+
+Run
+
+```
+sudo ./script/bootstrap
+sudo ./script/bootstrap-node
+```
+
+to install the required dependencies.
+
+### Run the Server
+
+Run
+
+```
+./script/serve
+```
+
+and open `http://localhost:4000` to see it in action.
 
 ## License
 
